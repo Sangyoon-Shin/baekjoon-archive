@@ -1,0 +1,21 @@
+# Visual Studio, 빌드 관련
+.vs/
+*.sln
+*.vcxproj*
+*.pdb
+*.exe
+*.obj
+*.ipch
+*.cache
+*.ilk
+*.json
+*.vscode/
+
+x64/
+Debug/
+Release/
+
+# 기타 임시파일
+*.log
+*.tlog
+*.user
