@@ -21,3 +21,5 @@ Release/
 *.user
 test.py
 
+# 미해결 문제
+1718.py
