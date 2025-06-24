@@ -1,18 +1,15 @@
 import sys
-from itertools import combinations
 input = sys.stdin.readline
 
-ans = set()
+# 입력 제한 1000. O(n^2)으로 짜도 됨
 
-string = list(input().strip())
-print(string)
+string = input().strip()
+res = set()
 
-newword = []
-for i in range(1, len(string) + 1):
-    word = list(combinations(string, i))
-    for j in word:
-        k = ', '.join(j)
-        ans.add(k)
+for i in range(len(string)):
+    for j in range(i, len(string)):
+        res.add(string[i:j + 1])
 
-print(ans)
+print(len(res))
+
 
