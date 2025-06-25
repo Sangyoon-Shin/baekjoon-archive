@@ -13,6 +13,7 @@ while True:
         c = math.sqrt(a**2 + b**2)
         print(f"Triangle #{t}")
         print(f"c = {c:.3f}")
+        print()
 
     elif a == -1:
         # a^2 = c^2 - b^2
