@@ -20,6 +20,9 @@ Release/
 *.tlog
 *.user
 test.py
+test.java
 
 # 미해결 문제
 1718.py
+4134.py
+7662.py
