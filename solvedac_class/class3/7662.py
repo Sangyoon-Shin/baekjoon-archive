@@ -4,6 +4,7 @@
 # 값 삽입할 때, 양쪽 힙큐에 다 넣고, hashtable에도 넣어주기
 # hashtable 만들어야 함. 동일한 정수 들어올 수 있기 때문에 개수 세줘야 할 듯
 # 값 삭제할 때, hashtable에서 해당하는 값 삭제해주기
+# del 딕셔너리[키]로 반대편 heap에서도 지워주면서 update해주면 어떨까..
 
 import sys
 import heapq
@@ -26,42 +27,36 @@ for i in range(T):
             heapq.heappush(ascheap, n)
             heapq.heappush(descheap, -n)
         elif command == 'D' and n == 1: # n == 1일때 최댓값 뽑기
-            flag = 1
-            while flag == 1:
-                for key in res.keys():
-                    if res[key] == 0:
-                        flag = 0
-                        break
-            if flag == 0:
-                pass
-            else:
-                value = -heapq.heappop(descheap)
-                while True:
-                    if res[value] >= 1:
-                        break
+            while True:
+                if len(descheap) == 0:
+                    break
+                else:
+                    value = -heapq.heappop(descheap)
+                    if res[value] == 0:
+                        continue
                     else:
-                        value = -heapq.heappop(descheap)
-                        
-                if value in res.keys():
-                    res[value] -= 1
+                        res[value] -= 1
+                        break
             
         elif command == 'D' and n == -1: # n == -1일때 최솟값 뽑기
-            value = heapq.heappop(ascheap)
-            if value in res.keys():
-                res[value] -= 1
+            while True:
+                if len(ascheap) == 0:
+                    break
+                else:
+                    value = heapq.heappop(ascheap)
+                    if res[value] == 0:
+                        continue
+                    else:
+                        res[value] -= 1
+                        break
+
+    while len(descheap) > 0 and (-descheap[0] not in res.keys() or res[-descheap[0]] == 0):
+        -heapq.heappop(descheap)
+    while len(ascheap) > 0 and (ascheap[0] not in res.keys() or res[ascheap[0]] == 0):
+        heapq.heappop(ascheap)
     
-    resarr = []
-    for key in res.keys():
-        if res[key] >= 1:
-            for x in range(res[key]):
-                resarr.append(key)
-    
-    if len(resarr) == 0:
+    if len(descheap) == 0 or len(ascheap) == 0:
         print("EMPTY")
     else:
-        print(*resarr)
-        print(max(resarr), min(resarr))
-    
-
-        
+        print(-descheap[0], ascheap[0])
 
