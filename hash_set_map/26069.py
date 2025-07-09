@@ -10,7 +10,7 @@ for i in range(n):
     prev, cur = map(str, input().strip().split())
     if start == 0 and prev != 'ChongChong' and cur != 'ChongChong':
         pass
-    elif (cur == 'ChongChong' and start == 0) or (prev == 'ChingChong' and start == 0):
+    elif (cur == 'ChongChong' and start == 0) or (prev == 'ChongChong' and start == 0):
         start = 1
         dance[cur] = 1
         dance[prev] = 1
