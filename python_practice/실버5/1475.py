@@ -1,44 +1,51 @@
 import sys
 input = sys.stdin.readline
 
-num = list(input().strip())
+n = list(map(int, list(input().strip())))
+cnt = {}
 
-# 앞에서부터 스택에 쌓으면서 스택에 이미 있는 값이 나오면? 스택을 비워버리고 cnt++
-# 9가 들어가는데 스택에 9가 있다면 6으로 바꿔서 넣자. 여기서 6도 있다면 스택 비워버리고 cnt++. 반대의 경우도 마찬가지
-# 문제.. 연속된 숫자 들어왔을 때 순서를 바꾸면 더 작은 cnt 만들 수 있는 경우가 있음.
+for i in n:
+    if i not in cnt:
+        cnt[i] = 1
+    else:
+        cnt[i] += 1
 
-stack = []
-cnt = 0
-for i in num:
-    if i not in stack:
-        stack.append(i)
+max = 0
+maxidx = -1
+for i in cnt.keys():
+    if cnt[i] > max:
+        max = cnt[i]
+        maxidx = i
 
-    elif i != '6' and i != '9' and i in stack:
-        stack.clear()
-        stack.append(i)
-        cnt += 1
-    
-    elif i == '6' and '6' in stack:
-        if '9' in stack:
-            stack.clear()
-            stack.append(i)
-            cnt += 1
+# 6이나 9가 제일 많이 나온 값일 경우에만 바꿔보기 시도. 아닌 경우는 그냥 max 만큼의 세트 필요
+# 6, 9 나오는 개수 더해서 그걸 2로 나누고 남은 나머지는 더해주기. 
+# 그 값이 idx 6, 9 를 제외한 항목의 개수보다 큰지 작은지 비교하며 max 업데이트
+if maxidx == 6 or maxidx == 9:
+    if 6 in cnt and 9 in cnt:
+        max = cnt[6] + cnt[9]
+        if max % 2 == 1:
+            max = (max // 2) + 1
         else:
-            stack.append('9')
+            max = max // 2
 
-    elif i == '9' and '9' in stack:
-        if '6' in stack:
-            stack.clear()
-            stack.append(i)
-            cnt += 1
+    elif 6 not in cnt and 9 in cnt:
+        if max % 2 == 1:
+            max = cnt[9] // 2 + 1
         else:
-            stack.append('6')
+            max = cnt[9] // 2
 
-if len(stack) > 0:
-    stack.clear
-    cnt += 1
-    print(cnt)
+    elif 6 in cnt and 9 not in cnt:
+        if max % 2 == 1:
+            max = cnt[6] // 2 + 1
+        else:
+            max = cnt[6] // 2
+        
+    for i in cnt:
+        if i != 6 and i != 9:
+            if cnt[i] > max:
+                max = cnt[i]
+    print(max) 
 else:
-    print(cnt)
+    print(max)
 
-
+    
