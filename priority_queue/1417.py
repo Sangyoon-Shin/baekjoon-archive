@@ -1,15 +1,15 @@
-import sys
-import heapq
-input = sys.stdin.readline
+# import sys
+# import heapq
+# input = sys.stdin.readline
 
-candidate = []
+# candidate = []
 
-n = int(input())
-for i in range(n):
-    k = int(input())
-    heapq.heappush(candidate, -k)
+# n = int(input())
+# for i in range(n):
+#     k = int(input())
+#     heapq.heappush(candidate, -k)
 
-maximum = -heapq.heappop(candidate)
+# maximum = -heapq.heappop(candidate)
 
-while True:
-    if  
+# while True:
+#     if  

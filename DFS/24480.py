@@ -1,34 +1,33 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10**6)
 
-vertex, edge, start = map(int, input().split())
+count = 0 
+def dfs(graph, visited, start):
+    global count
+    count += 1
+    visited[start] = count
+    for i in graph[start]:
+        if visited[i] == False:
+            dfs(graph, visited, i)
 
-graph = {}
+n, m, r = map(int, input().split())
 
-for i in range(edge):
+visited = [0] * (n + 1)
+graph = [[] for i in range(n + 1)]
+
+for i in range(m):
     u, v = map(int, input().split())
-    if u not in graph:
-        graph[u] = []
     graph[u].append(v)
-
-    if v not in graph:
-        graph[v] = []
     graph[v].append(u)
 
-def bfs(graph, start):
-    visited = []
-    stack = []
+for i in range(1, n + 1):
+    graph[i].sort(reverse=True)
 
-    stack.append(start)
-    while len(stack) != 0:
-        stack.sort()
-        node = stack.pop()
-        if node not in visited:
-            visited.append(node)
-            stack.extend(reversed(graph.get(node, [])))
-            print(node, end='\n')
-        if len(stack) == 0:
-            print(0)
-    return visited
+dfs(graph, visited, r)
 
-bfs(graph, start)
+for i in range(1, n + 1):
+    if visited[i] != 0:
+        print(visited[i])
+    else:
+        print(0)

@@ -1,0 +1,14 @@
+n = int(input())
+interest = list(input().rstrip())
+
+cntsec , cntbig = 0, 0
+
+cntsec = interest.count("s")
+cntbig = interest.count("b")
+
+if cntsec > cntbig:
+    print("security!")
+elif cntsec < cntbig:
+    print("bigdata?")
+else:
+    print("bigdata? security!")
