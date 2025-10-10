@@ -19,7 +19,7 @@ for i in range(len(num)):
         val.append(value)
     res.append((i + 1, max(val)))
 
-res.sort(key=lambda x:(-x[1], x[0]))
+res.sort(key=lambda x:(-x[1], -x[0]))
 print(res[0][0])    
 
     
