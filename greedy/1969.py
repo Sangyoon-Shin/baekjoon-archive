@@ -16,11 +16,11 @@ for i in range(m):
             cnt[dna[j][i]] = 1
         else:
             cnt[dna[j][i]] += 1
+    # 나온 횟수는 내림차순, 사전순은 오름차순으로
     sortedcnt = sorted(cnt.items(), key=lambda x:(-x[1], x[0]))
     res.append(sortedcnt[0][0])
     for k in range(1, len(sortedcnt)):
         dist += sortedcnt[k][1]
-
 
 print(''.join(res))
 print(dist)
